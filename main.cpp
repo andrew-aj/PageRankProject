@@ -3,15 +3,13 @@
 #include <string>
 #include <map>
 #include <vector>
-#include <unordered_map>
-#include <unordered_set>
 
 class AdjacencyList {
 private:
     std::map<std::string, int> stringConversion;
     int highest = 0;
 
-    std::map<int, std::unordered_set<int>> adjacenyStorage;
+    std::map<int, std::vector<int>> adjacenyStorage;
 
     int powerIterations;
 
@@ -41,7 +39,7 @@ void AdjacencyList::insert(const std::string &from, const std::string &to) {
     int fLoc = checkIfExists(from);
     int tLoc = checkIfExists(to);
 
-    adjacenyStorage[fLoc].insert(tLoc);
+    adjacenyStorage[fLoc].push_back(tLoc);
 }
 
 void AdjacencyList::PageRank() {
