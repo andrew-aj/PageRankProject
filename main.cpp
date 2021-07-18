@@ -45,16 +45,17 @@ void AdjacencyList::insert(const std::string &from, const std::string &to) {
 void AdjacencyList::PageRank() {
     std::map<int, double> iterations;
     //Auto generate first power iteration
-    for (auto it = stringConversion.begin(); it != stringConversion.end(); it++) {
-        iterations[it->second] = 1. / stringConversion.size();
+    for (auto & it : stringConversion) {
+        iterations[it.second] = 1. / stringConversion.size();
     }
 
     for (int i = 1; i < powerIterations; i++) {
         std::map<int, double> copy = iterations;
         iterations.clear();
         for (auto &it : adjacenyStorage) {
+            double& cp = copy[it.first];
             for (auto &second : it.second) {
-                iterations[second] += (1. / it.second.size()) * (copy[it.first]);
+                iterations[second] += (1. / it.second.size()) * cp;//(copy[it.first]);
             }
         }
     }
